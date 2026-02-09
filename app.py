@@ -98,6 +98,10 @@ if not st.session_state.accepted:
     st.markdown('<p style="color: #4A148C; font-size: 1.1rem;">Przygotowałem dla Ciebie coś specjalnego.</p>', unsafe_allow_html=True)
     st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
     st.markdown('<h2 style="color: #311B92; margin-bottom: 45px; font-weight: 600;">Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
+    st.markdown(
+        f'<h2 style="color:#311B92; margin-bottom:45px;">{current_question}</h2>',
+        unsafe_allow_html=True
+    )
 
 
     col1, col2 = st.columns(2, gap="large")
