@@ -94,21 +94,11 @@ questions = [
 
 # --- 4. RENDER ---
 if not st.session_state.accepted:
+    st.markdown('<h1 class="title-text">Hej Kochanie... ✨💜</h1>', unsafe_allow_html=True)
+    st.markdown('<p style="color: #4A148C; font-size: 1.1rem;">Przygotowałem dla Ciebie coś specjalnego.</p>', unsafe_allow_html=True)
+    st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
+    st.markdown('<h2 style="color: #311B92; margin-bottom: 45px; font-weight: 600;">Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
 
-    current_question = questions[min(
-        st.session_state.step,
-        len(questions) - 1
-    )]
-
-    st.markdown(
-        f'<h1 style="color:#4A148C;">Hej Kochanie ✨</h1>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        f'<h2 style="color:#311B92; margin-bottom:45px;">{current_question}</h2>',
-        unsafe_allow_html=True
-    )
 
     col1, col2 = st.columns(2, gap="large")
 
@@ -126,8 +116,9 @@ if not st.session_state.accepted:
             st.rerun()
 
     if st.session_state.show_error:
-        st.error("BŁĄD MIŁOŚCIOWY 💔 — odpowiedź NIE została usunięta z systemu!")
-        st.warning("Jedyna poprawna odpowiedź to TAK 😈")
+        st.error("BŁĄD MIŁOSCIOWY: Wybrana opcja wygasła lub nigdy nie istniała! Proszę natychmiast kliknąć przycisk po lewej stronie. ⚠️😈")
+        st.warning("System wykrył próbę oszustwa! Odpowiedź 'TAK' jest jedyną poprawną w Twoim przypadku")
+
 
 else:
     # --- SUKCES ---
