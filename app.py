@@ -1,42 +1,75 @@
 import streamlit as st
 import time
 
-# --- Konfiguracja strony ---
-st.set_page_config(page_title="Pytanie...", page_icon="💜")
+# --- 1. Konfiguracja strony ---
+st.set_page_config(page_title="Walentynka 2026", page_icon="💜", layout="centered")
 
-# --- CSS: Wygląd aplikacji ---
+# --- 2. CSS - STYLING "PRO" ---
 st.markdown("""
 <style>
-    /* Tło aplikacji - jasny fiolet */
+    /* Import czcionki dla ładniejszego wyglądu */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    /* Tło całej aplikacji - delikatny gradient */
     .stApp {
-        background-color: #F3E5F5;
+        background: linear-gradient(135deg, #fdfbfd 0%, #e2d1f0 100%);
+        font-family: 'Montserrat', sans-serif;
     }
     
-    /* WYMUSZENIE CIEMNEGO KOLORU CZCIONKI */
-    h1, h2, h3, p, div, span, label {
-        color: #4A148C !important; /* Ciemny, głęboki fiolet */
+    /* Nagłówki */
+    h1, h2, h3 {
+        color: #4A148C !important;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     
-    /* Styl przycisków */
-    .stButton button {
-        background-color: #8E24AA;
-        color: white !important; /* Tekst na przycisku musi być biały */
-        border-radius: 10px;
-        font-weight: bold;
-        border: 2px solid #6A1B9A;
-    }
-    .stButton button:hover {
-        background-color: #6A1B9A;
-        border-color: #4A148C;
+    p {
+        color: #6A1B9A !important;
+        font-size: 1.2rem;
+        text-align: center;
     }
 
-    /* Animacja latających serc (HTML/CSS) */
+    /* STYL PRZYCISKÓW - WYMASTEROWANY */
+    .stButton > button {
+        background: linear-gradient(to right, #8E24AA, #7B1FA2);
+        color: white !important; /* Biały tekst */
+        font-weight: bold;
+        border: none;
+        border-radius: 25px; /* Zaokrąglone rogi */
+        padding: 15px 30px;
+        font-size: 18px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Cień pod przyciskiem */
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    /* Efekt najechania myszką na przycisk */
+    .stButton > button:hover {
+        transform: scale(1.05); /* Lekkie powiększenie */
+        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        background: linear-gradient(to right, #9C27B0, #8E24AA);
+    }
+    
+    /* --- GALERIA ZDJĘĆ PRO --- */
+    /* To wymusza, żeby zdjęcia były tej samej wielkości i przycięte do kwadratu */
+    div[data-testid="stImage"] img {
+        height: 300px !important; /* Stała wysokość */
+        object-fit: cover !important; /* Dopasowanie bez rozciągania */
+        border-radius: 15px; /* Zaokrąglone rogi zdjęć */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Cień pod zdjęciem */
+        transition: transform 0.3s ease;
+    }
+    
+    div[data-testid="stImage"] img:hover {
+        transform: scale(1.02);
+    }
+
+    /* Animacja serc */
     @keyframes falling {
         0% { transform: translateY(-10vh); opacity: 0; }
         10% { opacity: 1; }
         100% { transform: translateY(110vh); opacity: 0; }
     }
-    
     .heart {
         position: fixed;
         color: #8E24AA;
@@ -47,7 +80,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Funkcja generująca deszcz fioletowych serc
+# Funkcja JS do serc
 def rain_purple_hearts():
     script = """
     <script>
@@ -65,7 +98,7 @@ def rain_purple_hearts():
     """
     st.components.v1.html(script, height=0)
 
-# --- Zarządzanie stanem (pamięć aplikacji) ---
+# --- 3. Logika (Stan aplikacji) ---
 if 'no_count' not in st.session_state:
     st.session_state.no_count = 0
 if 'accepted' not in st.session_state:
@@ -75,48 +108,50 @@ if 'accepted' not in st.session_state:
 no_texts = [
     "Nie... 😢",
     "Jesteś pewna? 🤔",
-    "Ale na pewno? 🥺",
-    "Przemyśl to! 💜",
-    "Ranisz moje serce! 💔"
+    "Szkoda... 💔",
+    "Przemyśl to! 🥺",
+    "Nie masz wyboru 😈" # Ostatni tekst
 ]
 
-# --- Logika aplikacji ---
+# --- 4. Główny widok ---
 
 if st.session_state.accepted:
-    # --- EKRAN SUKCESU (Po kliknięciu TAK) ---
+    # --- EKRAN SUKCESU ---
     rain_purple_hearts()
     st.balloons()
     
-    st.title("Jeeej! Wiedziałem, że się zgodzisz! 💜💜💜")
-    st.header("Kocham Cię! Jesteś moją Walentynką!")
+    st.title("Jeeej! 💜💜💜")
+    st.header("Wiedziałem, że się zgodzisz!")
+    st.write("Jesteś moją Walentynką! Kocham Cię!")
     st.write("---")
     
-    # --- MIEJSCE NA TWOJE ZDJĘCIA ---
-    st.subheader("To my! 🥰")
+    st.subheader("My 🥰")
     
+    # Kolumny na zdjęcia
     col_foto1, col_foto2 = st.columns(2)
     
     with col_foto1:
-        # Tu wpisz nazwę pierwszego pliku, np. "foto1.jpg"
-        # Na razie dałem link z internetu, żebyś widział, że działa
-        st.image("https://cataas.com/cat", caption="Nasze chwile", use_container_width=True)
-        # Jak wgrasz swoje zdjęcie, zmień powyższą linię na:
-        # st.image("foto1.jpg", caption="Nasze chwile", use_container_width=True)
+        # ZMIEŃ LINK/NAZWĘ PLIKU PONIŻEJ
+        st.image("https://cataas.com/cat", use_container_width=True) 
 
     with col_foto2:
-        # Tu wpisz nazwę drugiego pliku, np. "foto2.jpg"
-        st.image("https://cataas.com/cat/cute", caption="Nasze wspomnienia", use_container_width=True)
-        # Jak wgrasz swoje zdjęcie, zmień powyższą linię na:
-        # st.image("foto2.jpg", caption="Nasze wspomnienia", use_container_width=True)
+        # ZMIEŃ LINK/NAZWĘ PLIKU PONIŻEJ
+        st.image("https://cataas.com/cat/cute", use_container_width=True)
     
 else:
     # --- EKRAN PYTANIA ---
+    st.markdown("<br>", unsafe_allow_html=True) # Odstęp od góry
     st.title("Hej Kochanie! 💜")
-    st.subheader("Mam do Ciebie bardzo ważne pytanie...")
-    st.write("---")
+    st.write("Mam do Ciebie bardzo ważne pytanie...")
+    
+    # Opcjonalnie: Główne zdjęcie pytające (możesz dodać jeśli chcesz)
+    # st.image("pytanie.jpg", width=300)
+    
+    st.markdown("---")
     st.header("Czy zostaniesz moją Walentynką? 🍇")
+    st.markdown("<br>", unsafe_allow_html=True)
 
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1, 1], gap="medium")
 
     with col1:
         if st.button("TAK! 😍", use_container_width=True):
@@ -124,9 +159,19 @@ else:
             st.rerun()
 
     with col2:
-        # Przycisk NIE znika po 5 kliknięciach
-        if st.session_state.no_count < 5:
+        # Pobieramy tekst
+        if st.session_state.no_count < len(no_texts):
             current_text = no_texts[st.session_state.no_count]
-            if st.button(current_text, use_container_width=True):
+        else:
+            current_text = no_texts[-1] # Zabezpieczenie, zostaje ostatni tekst
+
+        # Rysujemy przycisk "Nie"
+        if st.button(current_text, use_container_width=True):
+            # Jeśli to był ostatni tekst (Diabełek), to kliknięcie działa jak zgoda!
+            if current_text == "Nie masz wyboru 😈":
+                st.session_state.accepted = True
+                st.rerun()
+            else:
+                # W innym przypadku po prostu zmieniamy tekst
                 st.session_state.no_count += 1
                 st.rerun()
