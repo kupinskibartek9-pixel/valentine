@@ -98,14 +98,14 @@ no_options = [
     "Pomyśl jeszcze raz... 🧐",
     "Jesteś pewna? 💔",
     "Może jednak TAK? ✨",
-    "Nie masz wyboru 😈"
+    "Nie masz wyboru hihi 😈"
 ]
 
 # --- 4. Renderowanie ---
 st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 
 if not st.session_state.accepted:
-    st.markdown('<h1 class="title-text">Hej Kochanie... ✨</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="title-text">Hej Kochanie... ✨💜</h1>', unsafe_allow_html=True)
     st.markdown('<p style="color: #4A148C; font-size: 1.1rem;">Przygotowałem dla Ciebie coś specjalnego.</p>', unsafe_allow_html=True)
     st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
     st.markdown('<h2 style="color: #311B92; margin-bottom: 45px; font-weight: 600;">Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
@@ -120,7 +120,7 @@ if not st.session_state.accepted:
     with col2:
         current_no_text = no_options[min(st.session_state.step, len(no_options)-1)]
         if st.button(current_no_text, key="no_final"):
-            if current_no_text == "Nie masz wyboru 😈":
+            if current_no_text == "Nie masz wyboru hihi 😈":
                 st.session_state.show_error = True
             else:
                 st.session_state.step += 1
@@ -129,14 +129,14 @@ if not st.session_state.accepted:
     # WYŚWIETLANIE ŚMIESZNEGO BŁĘDU
     if st.session_state.show_error:
         st.markdown("<br>", unsafe_allow_html=True)
-        st.error("BŁĄD 404: Wybrana opcja wygasła lub nigdy nie istniała! Proszę natychmiast kliknąć przycisk po lewej stronie. ⚠️😈")
-        st.warning("System wykrył próbę oszustwa! Odpowiedź 'TAK' jest jedyną dostępną w Twoim regionie.")
+        st.error("BŁĄD MIŁOSCIOWY: Wybrana opcja wygasła lub nigdy nie istniała! Proszę natychmiast kliknąć przycisk po lewej stronie. ⚠️😈")
+        st.warning("System wykrył próbę oszustwa! Odpowiedź 'TAK' jest jedyną poprawną w Twoim przypadku")
 
 else:
     # --- EKRAN SUKCESU ---
     st.balloons()
     st.markdown('<h1 class="title-text">Jeeej! 💜</h1>', unsafe_allow_html=True)
-    st.markdown('<h2 style="color: #311B92; margin-bottom: 20px;">Wiedziałem! Najlepsza decyzja w życiu! 🥰</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 style="color: #311B92; margin-bottom: 20px;">Wiedziałem, że się zgodzisz! 🥰💜</h2>', unsafe_allow_html=True)
     st.markdown('<p style="color: #4A148C; font-size: 1.3rem; font-weight: 600;">Kocham Cię najbardziej na świecie!</p>', unsafe_allow_html=True)
     st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
     
