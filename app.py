@@ -147,46 +147,7 @@ else:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- 3. Logika (Stan) ---
-if 'step' not in st.session_state:
-    st.session_state.step = 0
-if 'accepted' not in st.session_state:
-    st.session_state.accepted = False
-if 'show_error' not in st.session_state:
-    st.session_state.show_error = False
 
-no_options = [
-    "Nie... 😢",
-    "Pomyśl jeszcze raz... 🧐",
-    "Jesteś pewna? 💔",
-    "Może jednak TAK? ✨",
-    "Nie masz wyboru 😈"
-]
-
-# --- 4. Renderowanie ---
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-
-if not st.session_state.accepted:
-    st.markdown('<h1 class="title-text">Hej Kochanie... ✨</h1>', unsafe_allow_html=True)
-    st.markdown('<p style="color: #4A148C; font-size: 1.1rem;">Przygotowałem dla Ciebie coś specjalnego.</p>', unsafe_allow_html=True)
-    st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
-    st.markdown('<h2 style="color: #311B92; margin-bottom: 45px; font-weight: 600;">Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
-
-    col1, col2 = st.columns(2, gap="large")
-
-    with col1:
-        if st.button("TAK! 😍", key="yes_final"):
-            st.session_state.accepted = True
-            st.rerun()
-
-    with col2:
-        current_no_text = no_options[min(st.session_state.step, len(no_options)-1)]
-        if st.button(current_no_text, key="no_final"):
-            if current_no_text == "Nie masz wyboru 😈":
-                st.session_state.show_error = True
-            else:
-                st.session_state.step += 1
-            st.rerun()
 
     # WYŚWIETLANIE ŚMIESZNEGO BŁĘDU
     if st.session_state.show_error:
