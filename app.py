@@ -84,6 +84,11 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+/* 🔒 DEFINITYWNIE WYŁĄCZAMY ANIMACJĘ DLA PRZYCISKU NIE */
+div[data-testid="stHorizontalBlock"] div:nth-of-type(2) .stButton button {
+    animation: none !important;
+    transform: none !important;
+}
 
 # --- 3. Logika (Stan) ---
 if 'step' not in st.session_state:
