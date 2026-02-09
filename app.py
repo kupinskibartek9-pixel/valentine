@@ -8,11 +8,9 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
-/* UKRYCIE STREAMLIT UI */
 header, footer, #MainMenu {display:none;}
 .stDeployButton {display:none;}
 
-/* 🌌 TŁO – PRO, GŁĘBOKIE, PREMIUM */
 .stApp {
     background:
         radial-gradient(circle at top left, #b388ff 0%, transparent 40%),
@@ -21,43 +19,28 @@ header, footer, #MainMenu {display:none;}
     font-family: 'Poppins', sans-serif;
 }
 
-/* WYŚRODKOWANIE */
-.block-container {
-    padding-top: 8vh !important;
-    max-width: 900px !important;
-}
-
-/* 🟣 GŁÓWNA KARTA – SERCE APPKI */
-.pro-card {
+/* 🔥 KARTA = CAŁA APLIKACJA */
+section.main > div {
     background: linear-gradient(
         135deg,
-        rgba(255,255,255,0.95),
-        rgba(245,235,255,0.95)
+        rgba(255,255,255,0.96),
+        rgba(245,235,255,0.96)
     );
     border-radius: 36px;
     padding: 60px 50px;
+    max-width: 900px;
+    margin: 8vh auto;
     box-shadow:
         0 40px 90px rgba(42,0,63,0.55),
         inset 0 0 0 1px rgba(255,255,255,0.6);
-    text-align: center;
 }
 
 /* TEKST */
-h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #4a148c;
-}
-h2 {
-    font-size: 1.9rem;
-    color: #311B92;
-}
-p {
-    font-size: 1.15rem;
-    color: #4A148C;
-}
+h1 {font-size:3rem; font-weight:700; color:#4a148c;}
+h2 {font-size:1.9rem; color:#311B92;}
+p {font-size:1.15rem; color:#4A148C;}
 
-/* PRZYCISKI – BAZA */
+/* PRZYCISKI */
 .stButton > button {
     width: 100% !important;
     padding: 22px 0 !important;
@@ -66,63 +49,41 @@ p {
     font-weight: 700 !important;
     letter-spacing: 2px !important;
     border: none !important;
-    transition: all 0.3s ease !important;
 }
 
-/* WYMUSZENIE BIAŁEGO TEKSTU */
-.stButton > button * {
-    color: white !important;
-}
+/* BIAŁY TEKST */
+.stButton > button * {color:white !important;}
 
-/* 💜 TAK – PREMIUM CTA */
-div[data-testid="stHorizontalBlock"] div:nth-of-type(1) .stButton button {
+/* TAK */
+div[data-testid="stHorizontalBlock"] div:nth-of-type(1) button {
     background: linear-gradient(135deg, #7b1fa2, #ce93d8) !important;
     box-shadow: 0 18px 45px rgba(123,31,162,0.6) !important;
     animation: pulseYes 1.6s infinite;
 }
 
 @keyframes pulseYes {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.09);}
-    100% {transform: scale(1);}
+    0% {transform:scale(1);}
+    50% {transform:scale(1.09);}
+    100% {transform:scale(1);}
 }
 
-/* 😈 NIE – STONOWANE */
-div[data-testid="stHorizontalBlock"] div:nth-of-type(2) .stButton button {
-    background: rgba(90, 40, 120, 0.6) !important;
+/* NIE */
+div[data-testid="stHorizontalBlock"] div:nth-of-type(2) button {
+    background: rgba(90,40,120,0.6) !important;
     animation: none !important;
     transform: none !important;
     opacity: 0.8;
 }
 
 /* ZDJĘCIA */
-div[data-testid="stImage"] img {
-    height: 380px !important;
-    object-fit: cover !important;
+img {
     border-radius: 28px;
     box-shadow: 0 25px 45px rgba(0,0,0,0.25);
 }
 </style>
 """, unsafe_allow_html=True)
-
-# --- 3. Logika ---
-if 'step' not in st.session_state:
-    st.session_state.step = 0
-if 'accepted' not in st.session_state:
-    st.session_state.accepted = False
-if 'show_error' not in st.session_state:
-    st.session_state.show_error = False
-
-no_options = [
-    "Nie... 😢",
-    "Pomyśl jeszcze raz... 🧐",
-    "Jesteś pewna? 💔",
-    "Może jednak TAK? ✨",
-    "Nie masz wyboru hihi 😈"
-]
-
 # --- 4. Render ---
-st.markdown('<div class="pro-card">', unsafe_allow_html=True)
+
 
 
 if not st.session_state.accepted:
@@ -163,4 +124,6 @@ else:
 
     st.markdown('<h3>Do zobaczenia na randeczce 🌹</h3>', unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+
+
+
