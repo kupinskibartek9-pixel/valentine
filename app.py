@@ -73,6 +73,12 @@ st.markdown("""
         background: rgba(74, 20, 140, 0.7) !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
     }
+    div[data-testid="stHorizontalBlock"] div:nth-of-type(2) .stButton button {
+    background: rgba(74, 20, 140, 0.7) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    animation: none !important;
+    transform: none !important;
+     }
 
     /* GALERIA ZDJĘĆ */
     div[data-testid="stImage"] img {
