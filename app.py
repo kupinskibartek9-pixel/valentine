@@ -1,101 +1,109 @@
 import streamlit as st
 
 # --- 1. Konfiguracja strony ---
-st.set_page_config(page_title="Dla mojej Walentynki 💜", page_icon="✨", layout="centered")
+st.set_page_config(page_title="Special Question 💜", page_icon="✨", layout="wide")
 
-# --- 2. CSS - FULL PRO LOOK & FIXES ---
+# --- 2. CSS - ULTRA LUXURY & FIXES ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
-    /* 1. USUNIĘCIE BIAŁEGO PASKA I ELEMENTÓW SYSTEMOWYCH */
-    [data-testid="stHeader"] {display: none;}
+    /* CAŁKOWITE UKRYCIE GÓRNEGO PASKA STREAMLIT */
+    header {visibility: hidden;}
+    #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
-    
-    /* TŁO CAŁEJ APKI */
+
+    /* Tło z płynnym luksusowym gradientem */
     .stApp {
-        background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        background: linear-gradient(-45deg, #f3e5f5, #e1bee7, #d1c4e9, #f3e5f5);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
         font-family: 'Poppins', sans-serif;
     }
 
-    /* 2. GŁÓWNY PROSTOKĄT (KARTA) Z CIENIEM */
-    .main-card {
-        background: white;
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Wycentrowanie i usunięcie zbędnych marginesów */
+    .block-container {
+        padding-top: 5vh !important;
+        max-width: 850px !important;
+    }
+
+    /* PANEL GLASSMORPHISM */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.1);
         padding: 60px;
-        border-radius: 40px;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.15);
         text-align: center;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        margin-top: 50px;
+        margin-top: 20px;
     }
 
-    /* NAGŁÓWKI */
-    h1 {
-        color: #4A148C !important;
-        font-weight: 800 !important;
-        font-size: 3.5rem !important;
-        margin-bottom: 10px !important;
-    }
-    h2 {
-        color: #6A1B9A !important;
-        font-weight: 600 !important;
-        margin-bottom: 40px !important;
+    .title-text {
+        font-family: 'Playfair Display', serif;
+        color: #311B92 !important;
+        font-size: 3.2rem !important;
+        margin-bottom: 5px;
     }
 
-    /* 3. PRZYCISKI - DUŻE, FIOLETOWE, BIAŁA CZCIONKA */
+    /* STYLIZACJA PRZYCISKÓW */
     .stButton > button {
-        height: 85px !important;
-        border-radius: 25px !important;
-        font-size: 24px !important;
-        font-weight: bold !important;
+        border-radius: 50px !important;
+        padding: 20px 40px !important;
+        font-weight: 600 !important;
         text-transform: uppercase !important;
         letter-spacing: 2px !important;
         border: none !important;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        height: auto !important;
         width: 100% !important;
-        transition: all 0.3s ease !important;
     }
 
-    /* WYMUSZENIE BIAŁEGO TEKSTU W ŚRODKU PRZYCISKU */
+    /* WYMUSZENIE BIAŁEGO TEKSTU */
     .stButton > button p {
         color: white !important;
-        font-size: 24px !important;
-        font-weight: 800 !important;
+        margin-bottom: 0 !important;
     }
 
-    /* PRZYCISK TAK - PULSUJĄCY GRADIENT */
-    div[data-testid="column"]:nth-of-type(1) .stButton button {
-        background: linear-gradient(45deg, #7B1FA2, #9C27B0) !important;
-        box-shadow: 0 15px 30px rgba(123, 31, 162, 0.4) !important;
-        animation: pulseYes 1.8s infinite !important;
+    /* TYLKO PRZYCISK TAK PULSUJE */
+    div[data-testid="stHorizontalBlock"] div:nth-of-type(1) .stButton button {
+        background: linear-gradient(45deg, #6A1B9A, #9C27B0) !important;
+        box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4) !important;
+        animation: pulseOnlyYes 2s infinite;
     }
 
-    @keyframes pulseYes {
-        0% { transform: scale(1); box-shadow: 0 15px 30px rgba(123, 31, 162, 0.4); }
-        50% { transform: scale(1.08); box-shadow: 0 20px 40px rgba(123, 31, 162, 0.6); }
-        100% { transform: scale(1); box-shadow: 0 15px 30px rgba(123, 31, 162, 0.4); }
+    @keyframes pulseOnlyYes {
+        0% { transform: scale(1); box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4); }
+        50% { transform: scale(1.08); box-shadow: 0 15px 35px rgba(123, 31, 162, 0.6); }
+        100% { transform: scale(1); box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4); }
     }
 
-    /* PRZYCISK NIE - STATYCZNY, CIEMNIEJSZY */
-    div[data-testid="column"]:nth-of-type(2) .stButton button {
-        background: #4A148C !important;
-        animation: none !important;
-        transform: none !important;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    /* PRZYCISK NIE - STATYCZNY I ELEGANCKI */
+    div[data-testid="stHorizontalBlock"] div:nth-of-type(2) .stButton button {
+        background: rgba(74, 20, 140, 0.7) !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
     }
 
-    /* ZDJĘCIA - PRO LOOK */
+    /* GALERIA ZDJĘĆ */
     div[data-testid="stImage"] img {
-        height: 350px !important;
+        height: 380px !important;
         object-fit: cover !important;
-        border-radius: 30px;
-        border: 8px solid white;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        border-radius: 35px;
+        border: 10px solid white;
+        box-shadow: 0 25px 45px rgba(0,0,0,0.2);
     }
 </style>
 """, unsafe_allow_html=True)
 
-# --- 3. Logika (State) ---
+# --- 3. Logika (Stan) ---
 if 'step' not in st.session_state:
     st.session_state.step = 0
 if 'accepted' not in st.session_state:
@@ -112,49 +120,52 @@ no_options = [
 ]
 
 # --- 4. Renderowanie ---
-st.markdown('<div class="main-card">', unsafe_allow_html=True)
+st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 
 if not st.session_state.accepted:
-    # EKRAN PYTANIA
-    st.markdown('<h1>Hej Kochanie... ✨💜</h1>', unsafe_allow_html=True)
-    st.markdown('<p style="color:#7B1FA2; font-size: 1.2rem;">Mam do Ciebie bardzo ważne pytanie.</p>', unsafe_allow_html=True)
-    st.markdown('<hr style="border: 0.5px solid #eee; margin: 30px 0;">', unsafe_allow_html=True)
-    st.markdown('<h2>Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
+    st.markdown('<h1 class="title-text">Hej Kochanie... ✨</h1>', unsafe_allow_html=True)
+    st.markdown('<p style="color: #4A148C; font-size: 1.1rem;">Przygotowałem dla Ciebie coś specjalnego.</p>', unsafe_allow_html=True)
+    st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
+    st.markdown('<h2 style="color: #311B92; margin-bottom: 45px; font-weight: 600;">Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        if st.button("TAK! 😍", key="yes"):
+        if st.button("TAK! 😍", key="yes_final"):
             st.session_state.accepted = True
             st.rerun()
 
     with col2:
-        label = no_options[min(st.session_state.step, len(no_options)-1)]
-        if st.button(label, key="no"):
-            if label == "Nie masz wyboru 😈":
+        current_no_text = no_options[min(st.session_state.step, len(no_options)-1)]
+        if st.button(current_no_text, key="no_final"):
+            if current_no_text == "Nie masz wyboru 😈":
                 st.session_state.show_error = True
             else:
                 st.session_state.step += 1
             st.rerun()
 
+    # WYŚWIETLANIE ŚMIESZNEGO BŁĘDU
     if st.session_state.show_error:
         st.markdown("<br>", unsafe_allow_html=True)
-        st.error("⚠️ BŁĄD SYSTEMU: Ta odpowiedź jest zablokowana. Musisz wybrać TAK! 😈")
+        st.error("BŁĄD 404: Wybrana opcja wygasła lub nigdy nie istniała! Proszę natychmiast kliknąć przycisk po lewej stronie. ⚠️😈")
+        st.warning("System wykrył próbę oszustwa! Odpowiedź 'TAK' jest jedyną dostępną w Twoim regionie.")
 
 else:
-    # EKRAN SUKCESU (ZDJĘCIA)
+    # --- EKRAN SUKCESU ---
     st.balloons()
-    st.markdown('<h1>Jeeej! 💜</h1>', unsafe_allow_html=True)
-    st.markdown('<h2 style="margin-bottom: 10px;">Wiedziałem, że się zgodzisz!! 🥰</h2>', unsafe_allow_html=True)
-    st.markdown('<p style="color:#4A148C; font-weight: 600;">To będzie najpiękniejszy dzień!</p>', unsafe_allow_html=True)
-    st.markdown('<hr style="border: 0.5px solid #eee; margin: 30px 0;">', unsafe_allow_html=True)
-
-    col_img1, col_img2 = st.columns(2, gap="medium")
-    with col_img1:
+    st.markdown('<h1 class="title-text">Jeeej! 💜</h1>', unsafe_allow_html=True)
+    st.markdown('<h2 style="color: #311B92; margin-bottom: 20px;">Wiedziałem! Najlepsza decyzja w życiu! 🥰</h2>', unsafe_allow_html=True)
+    st.markdown('<p style="color: #4A148C; font-size: 1.3rem; font-weight: 600;">Kocham Cię najbardziej na świecie!</p>', unsafe_allow_html=True)
+    st.markdown('<hr style="border: 0.5px solid rgba(255,255,255,0.3); margin: 30px 0;">', unsafe_allow_html=True)
+    
+    col_a, col_b = st.columns(2, gap="medium")
+    with col_a:
+        # PAMIĘTAJ O foto1.jpg na GitHubie!
         st.image("https://cataas.com/cat/says/Love", use_container_width=True)
-    with col_img2:
+    with col_b:
+        # PAMIĘTAJ O foto2.jpg na GitHubie!
         st.image("https://cataas.com/cat/cute", use_container_width=True)
-
-    st.markdown('<br><h2 style="color:#311B92; font-size: 2.5rem;">Do zobaczenia na randce! 🌹</h2>', unsafe_allow_html=True)
+    
+    st.markdown('<br><h3 style="color: #311B92; font-family: Playfair Display, serif; font-size: 2rem;">Do zobaczenia na naszej randce! 🌹</h3>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
