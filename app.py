@@ -134,3 +134,7 @@ else:
         st.image("https://cataas.com/cat/says/Love", use_container_width=True)
     with col_b:
         st.image("https://cataas.com/cat/cute", use_container_width=True)
+st.markdown('<br><h3 style="color: #311B92; font-family: Playfair Display, serif; font-size: 2rem;">Do zobaczenia na naszej randce! 🌹</h3>', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
+
