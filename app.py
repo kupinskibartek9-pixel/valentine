@@ -101,7 +101,7 @@ no_options = [
     "Pomyśl jeszcze raz... 🧐",
     "Jesteś pewna? 💔",
     "Może jednak TAK? ✨",
-    "Nie masz wyboru 😈"
+    "Nie masz wyboru hihi 😈"
 ]
 
 # --- 4. Render ---
@@ -135,7 +135,7 @@ if not st.session_state.accepted:
 else:
     st.balloons()
     st.markdown('<h1>Jeeej! 💜</h1>', unsafe_allow_html=True)
-    st.markdown('<h2>Wiedziałem! 🥰</h2>', unsafe_allow_html=True)
+    st.markdown('<h2>Wiedziałem, że się zgodzisz!! 🥰</h2>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -143,6 +143,6 @@ else:
     with col2:
         st.image("https://cataas.com/cat/cute", use_container_width=True)
 
-    st.markdown('<h3>Do zobaczenia na randce 🌹</h3>', unsafe_allow_html=True)
+    st.markdown('<h3>Do zobaczenia na randeczce 🌹</h3>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
