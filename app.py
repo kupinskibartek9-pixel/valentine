@@ -34,25 +34,7 @@ st.markdown("""
         max-width: 850px !important;
     }
 
-    /* PANEL GLASSMORPHISM */
-    .glass-card {
-        background: rgba(255, 255, 255, 0.22);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        border-radius: 50px;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-        padding: 60px;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .title-text {
-        font-family: 'Playfair Display', serif;
-        color: #311B92 !important;
-        font-size: 3.2rem !important;
-        margin-bottom: 5px;
-    }
+   
 
     /* STYLIZACJA PRZYCISKÓW */
     .stButton > button {
