@@ -8,82 +8,99 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
-/* CAŁKOWITE UKRYCIE GÓRNEGO PASKA STREAMLIT */
-header {visibility: hidden;}
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+/* UKRYCIE STREAMLIT UI */
+header, footer, #MainMenu {display:none;}
 .stDeployButton {display:none;}
 
-/* TŁO */
+/* 🌌 TŁO – PRO, GŁĘBOKIE, PREMIUM */
 .stApp {
-    background: linear-gradient(-45deg, #f3e5f5, #e1bee7, #d1c4e9, #f3e5f5);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    background:
+        radial-gradient(circle at top left, #b388ff 0%, transparent 40%),
+        radial-gradient(circle at bottom right, #7b1fa2 0%, transparent 45%),
+        linear-gradient(135deg, #2a003f 0%, #4a148c 45%, #6a1b9a 100%);
     font-family: 'Poppins', sans-serif;
 }
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* WYŚRODKOWANIE */
+.block-container {
+    padding-top: 8vh !important;
+    max-width: 900px !important;
 }
 
-/* KONTENER */
-.block-container {
-    padding-top: 5vh !important;
-    max-width: 850px !important;
+/* 🟣 GŁÓWNA KARTA – SERCE APPKI */
+.pro-card {
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.95),
+        rgba(245,235,255,0.95)
+    );
+    border-radius: 36px;
+    padding: 60px 50px;
+    box-shadow:
+        0 40px 90px rgba(42,0,63,0.55),
+        inset 0 0 0 1px rgba(255,255,255,0.6);
+    text-align: center;
+}
+
+/* TEKST */
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #4a148c;
+}
+h2 {
+    font-size: 1.9rem;
+    color: #311B92;
+}
+p {
+    font-size: 1.15rem;
+    color: #4A148C;
 }
 
 /* PRZYCISKI – BAZA */
 .stButton > button {
-    border-radius: 50px !important;
-    padding: 20px 40px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
+    width: 100% !important;
+    padding: 22px 0 !important;
+    border-radius: 999px !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
     letter-spacing: 2px !important;
     border: none !important;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    width: 100% !important;
+    transition: all 0.3s ease !important;
 }
 
 /* WYMUSZENIE BIAŁEGO TEKSTU */
-.stButton > button p {
+.stButton > button * {
     color: white !important;
-    margin-bottom: 0 !important;
 }
 
-/* PRZYCISK TAK – PULSUJE */
+/* 💜 TAK – PREMIUM CTA */
 div[data-testid="stHorizontalBlock"] div:nth-of-type(1) .stButton button {
-    background: linear-gradient(45deg, #6A1B9A, #9C27B0) !important;
-    box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4) !important;
-    animation: pulseOnlyYes 2s infinite;
+    background: linear-gradient(135deg, #7b1fa2, #ce93d8) !important;
+    box-shadow: 0 18px 45px rgba(123,31,162,0.6) !important;
+    animation: pulseYes 1.6s infinite;
 }
 
-@keyframes pulseOnlyYes {
-    0% { transform: scale(1); box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4); }
-    50% { transform: scale(1.08); box-shadow: 0 15px 35px rgba(123, 31, 162, 0.6); }
-    100% { transform: scale(1); box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4); }
+@keyframes pulseYes {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.09);}
+    100% {transform: scale(1);}
 }
 
-/* PRZYCISK NIE – STATYCZNY */
+/* 😈 NIE – STONOWANE */
 div[data-testid="stHorizontalBlock"] div:nth-of-type(2) .stButton button {
-    background: rgba(74, 20, 140, 0.7) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-}
-
-/* 🔒 TWARDY BLOK: NIE NIGDY NIE PULSUJE */
-div[data-testid="stHorizontalBlock"] div:nth-of-type(2) .stButton button {
+    background: rgba(90, 40, 120, 0.6) !important;
     animation: none !important;
     transform: none !important;
+    opacity: 0.8;
 }
 
-/* GALERIA */
+/* ZDJĘCIA */
 div[data-testid="stImage"] img {
     height: 380px !important;
     object-fit: cover !important;
-    border-radius: 35px;
-    border: 10px solid white;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+    border-radius: 28px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.25);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -105,7 +122,8 @@ no_options = [
 ]
 
 # --- 4. Render ---
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+st.markdown('<div class="pro-card">', unsafe_allow_html=True)
+
 
 if not st.session_state.accepted:
     st.markdown('<h1>Hej Kochanie... ✨💜</h1>', unsafe_allow_html=True)
