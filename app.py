@@ -108,7 +108,7 @@ no_options = [
 st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 
 if not st.session_state.accepted:
-    st.markdown('<h1>Hej Kochanie... ✨</h1>', unsafe_allow_html=True)
+    st.markdown('<h1>Hej Kochanie... ✨💜</h1>', unsafe_allow_html=True)
     st.markdown('<p style="color:#4A148C;">Przygotowałem dla Ciebie coś specjalnego.</p>', unsafe_allow_html=True)
     st.markdown('<hr>', unsafe_allow_html=True)
     st.markdown('<h2 style="color:#311B92;">Czy zostaniesz moją Walentynką?</h2>', unsafe_allow_html=True)
